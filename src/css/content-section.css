@@ -1,0 +1,50 @@
+.content-section {
+    max-width: 1440px;
+    
+    margin-top: 32px;
+    margin-bottom: 32px;
+}
+.gallery {
+display: flex;
+    
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+}
+.img-card {
+    width: 360px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #e0e0e0;
+    box-shadow: 15px 15px 30px #bebebe,
+            -15px -15px 30px #ffffff;
+}
+
+.img-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 6px 12px;
+    font-family: "Montserrat", sans-serif;
+        font-size: 12px;
+        
+}
+
+.info {
+    display: flex;
+    gap: 2px;
+    font-family: "Markazi Text", serif;
+    font-weight: 400;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+    
+    color: #0055d4;
+}
+
+.icon-info {
+    fill: #0055d4;
+}
+.icon-info:hover {fill: #1c274c;}
