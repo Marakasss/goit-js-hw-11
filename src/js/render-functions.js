@@ -59,6 +59,7 @@ export function createMarkup(data) {
                     </li>`
         })
         .join('');
+    
     gallery.innerHTML = '';
     gallery.insertAdjacentHTML('afterbegin', galleryItemsList);
     
@@ -75,7 +76,6 @@ export function handleSearch() {
     const searchBar = document.querySelector('.form');
     const icon = document.querySelector('.icon-img');
 
-    
     searchBar.addEventListener('input', event => {
             let searchValue = event.target.value.trim();
         if (searchValue) {

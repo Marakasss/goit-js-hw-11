@@ -10,9 +10,7 @@ export function getdata(searchValue) {
             image_type: 'photo',
             orientation: 'horizontal',
             safesearch: true,
-            per_page: 200,
-            
-            
+            per_page: 200,  
         }
     })
         .then(response => {
@@ -25,10 +23,8 @@ export function getdata(searchValue) {
         })
 
         .catch(error => {
-
             console.error(error);
             errorMessage('Something went wrong. Please try again later.');
         })
     
-
 }
