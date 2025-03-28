@@ -1,6 +1,5 @@
 .content-section {
     max-width: 1440px;
-    
     margin-top: 32px;
     margin-bottom: 32px;
 }
@@ -17,8 +16,7 @@ display: flex;
     overflow: hidden;
     border-radius: 6px;
     background: #e0e0e0;
-    box-shadow: 15px 15px 30px #bebebe,
-            -15px -15px 30px #ffffff;
+     box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 }
 
 .img-info {
@@ -40,7 +38,6 @@ display: flex;
     font-size: 16px;
     align-items: center;
     justify-content: center;
-    
     color: #0055d4;
 }
 
