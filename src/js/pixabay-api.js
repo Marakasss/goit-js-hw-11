@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { createMarkup, errorMessage } from './render-functions';
+import { createMarkup, errorMessage, infoMessage } from './render-functions';
 export function getdata(searchValue) {
     
     const myApiKey = '49580099-ba49dcf3c416d0b66883e5025'; 
@@ -17,14 +17,15 @@ export function getdata(searchValue) {
     })
         .then(response => {
             if (response.data.hits.length === 0) {
-                errorMessage(`Sorry, there are no images matching ${searchValue}. Please try again!`);
+                infoMessage(`Sorry, there are no images matching ${searchValue}. Please try again!`);
                 return;
             }
 
             createMarkup(response.data.hits);
         })
-        
+
         .catch(error => {
+
             console.error(error);
             errorMessage('Something went wrong. Please try again later.');
         })

@@ -66,7 +66,7 @@ export function createMarkup(data) {
         captionsData: 'alt',
         captionDelay: 250,
     });
-    
+
     lightbox.refresh();
 }
 
@@ -89,8 +89,8 @@ export function handleSearch() {
     searchBar.addEventListener('submit', event => {
         event.preventDefault();
         let searchValue = event.target['search-text'].value.trim();
-        if (event.target.name === 'search' && !searchValue) {
-            errorMessage(`Sorry`);
+        if (!searchValue) {
+            infoMessage('Enter some value');
             return;
         }
 
@@ -111,5 +111,14 @@ export function errorMessage(message) {
    iconColor: 'white',
    messageSize: '16px',
    class: 'toast',
+});
+}
+
+export function infoMessage(message) {
+ iziToast.info({
+   message: message,
+   position: window.innerWidth <= 768 ? 'bottomLeft' : 'topLeft',
+   transitionIn: 'fadeInDown',
+   messageSize: '16px',
 });
 }
