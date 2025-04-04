@@ -1,30 +1,32 @@
 import axios from 'axios';
-import { createMarkup, errorMessage, infoMessage } from './render-functions';
-export function getdata(searchValue) {
+import { errorMessage } from './render-functions';
+
+export async function getImagesByQuery(query) {
     
     const myApiKey = '49580099-ba49dcf3c416d0b66883e5025'; 
-    axios.get('https://pixabay.com/api/', {
+    return axios.get('https://pixabay.com/api/', {
         params: {
-            key: `${myApiKey}`,
-            q: `${searchValue}`,
+            key: myApiKey,
+            q: query,
             image_type: 'photo',
             orientation: 'horizontal',
             safesearch: true,
-            per_page: 200,  
+            per_page: 100,
         }
     })
-        .then(response => {
-            if (response.data.hits.length === 0) {
-                infoMessage(`Sorry, there are no images matching ${searchValue}. Please try again!`);
-                return;
-            }
-
-            createMarkup(response.data.hits);
-        })
+        .then(response => { return response.data.hits })
 
         .catch(error => {
-            console.error(error);
-            errorMessage('Something went wrong. Please try again later.');
-        })
-    
+                console.error(error);
+                removeLoading();
+                errorMessage('Something went wrong. Please try again later.');
+                return [];
+            })
+               
 }
+
+
+
+
+
+ 

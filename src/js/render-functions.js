@@ -2,37 +2,36 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import { getdata } from "./pixabay-api";
+
+const gallery = document.querySelector('.gallery');
 
 
-
-// !-----------FUNCTION ADDING CARDS WITH IMAGES TO GALLERY-------------
-export function createMarkup(data) {
-    const gallery = document.querySelector('.gallery');
+//-----------FUNCTION ADDING CARDS WITH IMAGES TO GALLERY-------------
+export function createGallery(images) {
+    
     
     //ADD PHOTOS TO GALLARY
-    const galleryItemsList = data
-        .map(data => {
-            const { likes,
+    const galleryItemsList = images
+        .map(({ likes,
                     views,
                     downloads,
                     comments,
                     tags,
                     largeImageURL,
                     webformatURL   
-                } = data;
+                }) =>
             
-            return `<li class="img-card">
-                        <a class="gallery-link" href= ${largeImageURL}>
+             `<li class="img-card">
+                        <a class="gallery-link" href= "${largeImageURL}">
                             <img
                             class="gallery-image"
-                            src= ${webformatURL}
-                            alt= ${tags}
+                            src= "${webformatURL}"
+                            alt= "${tags}"
                             />
                         </a>
                         <ul class="img-info">
                             <li class="info">
-                                <svg class="icon-info" width="18" height="18">
+                                <svg class="icon-info" name="like" width="18" height="18">
                                     <use href="./public/sprite.svg#icon-like"></use>
                                 </svg>
                                 <p>${likes}</p>
@@ -57,48 +56,41 @@ export function createMarkup(data) {
                             </li>
                         </ul>
                     </li>`
-        })
-        .join('');
+        ).join('');
     
-    gallery.innerHTML = '';
-    gallery.insertAdjacentHTML('afterbegin', galleryItemsList);
+    gallery.innerHTML = galleryItemsList;
     
+     waitForImagesToLoad()
     const lightbox = new SimpleLightbox('.gallery a', {
         captionsData: 'alt',
         captionDelay: 250,
     });
 
     lightbox.refresh();
+   
+}
+
+export function clearGallery() {
+    gallery.innerHTML = ''
 }
 
 
-export function handleSearch() {
+//------------FUNCTION CHANGED SEARCHBAR ICON COLOR IF SOME VALUE INPUTED------------
+
+
+export function changeIconColor(icon) {
     const searchBar = document.querySelector('.form');
-    const icon = document.querySelector('.icon-img');
-
-    searchBar.addEventListener('input', event => {
-            let searchValue = event.target.value.trim();
-        if (searchValue) {
-            icon.style.fill = '#1875FF';
-        }
-        else {
-            icon.style.fill = '';
-        }
-        })
-    
-    searchBar.addEventListener('submit', event => {
-        event.preventDefault();
-        let searchValue = event.target['search-text'].value.trim();
-        if (!searchValue) {
-            infoMessage('Enter some value');
-            return;
-        }
-
-        getdata(searchValue);
-    })
-
+    //removing prev listener = adding nev
+    searchBar.removeEventListener('input', changeColor);
+    searchBar.addEventListener('input', changeColor);
+       
+    function changeColor(event) {
+        icon.style.fill = event.target.value.trim() ? '#1875FF' : '';
+    }
 }
 
+
+//------------------------------------MESSAGES--------------------------------------
 
 
 export function errorMessage(message) {
@@ -122,3 +114,101 @@ export function infoMessage(message) {
    messageSize: '16px',
 });
 }
+
+//-----------------------------------LOADER FUNCTIONS----------------------------------------
+
+
+export function addLoading() {
+    const loader = document.querySelector('.loader');
+    loader.classList.remove('visually-hidden')
+    gallery.classList.add('visually-hidden')
+    
+    loader.style.display = 'block'
+}
+
+export function removeLoading() {
+    const loader = document.querySelector('.loader');
+    loader.classList.add('visually-hidden')
+    gallery.classList.remove('visually-hidden')
+    
+    loader.style.display = 'none';  
+}
+
+//Функцію додав щоб вирішити проблему з завантаженням сторінки.
+//Так як у мене likes, views, comemnts, downloads реалізовані іконками
+//то іконки завантажувались швидше за зображення і виглядало це не добре.
+function waitForImagesToLoad() {
+    const gallery = document.querySelector('.gallery');
+    if (!gallery) {
+        removeLoading();
+        return;
+    }
+
+    const images = gallery.querySelectorAll('img');
+    let loadedCount = 0;
+
+    if (images.length === 0) {
+        removeLoading(); //Якщо немає зображень, одразу ховаємо лоадер
+        return;
+    }
+
+    images.forEach(img => {
+        if (img.complete && img.naturalHeight !== 0) {
+            loadedCount++; //Якщо зображення вже готове
+        } else {
+            img.onload = () => {
+                loadedCount++;
+                checkIfAllImagesLoaded();
+            };
+            img.onerror = () => {
+                loadedCount++; //Якщо зображення не завантажилося, теж  враховуємо
+                checkIfAllImagesLoaded();
+            };
+        }
+    });
+
+    checkIfAllImagesLoaded();
+
+    if (loadedCount === images.length) {
+        checkIfAllImagesLoaded();
+    }
+
+    function checkIfAllImagesLoaded() {
+        if (loadedCount === images.length) {
+                    removeLoading(); //Ховаємо лоадер тільки коли все намальовано
+        }
+    } 
+}
+
+
+//---------------------FUNCTION HANDLE LIKE YOUR FAVORITE IMAGES-----------------------------
+
+
+export function clickOnlike() {
+    gallery.addEventListener('click', event => {
+        if (event.target.tagName === 'use') {
+            const like = event.target.closest('svg');
+            const likesValue = like.nextElementSibling;
+            
+            if (like.getAttribute('name') === 'like') {
+                let numberOfLikes = Number(likesValue.textContent);
+
+                if (like.style.fill !== 'darkblue') {
+                    like.style.fill = 'darkblue';
+                    likesValue.style.color = 'darkblue';
+                    numberOfLikes++;
+                } else {
+                    like.removeAttribute('style');
+                    likesValue.removeAttribute('style')
+                    numberOfLikes--;
+                }    
+
+                likesValue.textContent = numberOfLikes;
+            }
+            
+        }
+    })
+          
+}
+
+
