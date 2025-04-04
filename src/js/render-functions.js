@@ -195,6 +195,7 @@ export function clickOnlike() {
 
                 if (like.style.fill !== 'darkblue') {
                     like.style.fill = 'darkblue';
+                    like.style.transform = 'scale(1.05)'
                     likesValue.style.color = 'darkblue';
                     numberOfLikes++;
                 } else {
