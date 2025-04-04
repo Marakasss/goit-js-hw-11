@@ -1,33 +1,33 @@
-import{S as m,i as u,a as h}from"./assets/vendor-Db2TdIkw.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))r(o);new MutationObserver(o=>{for(const n of o)if(n.type==="childList")for(const s of n.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&r(s)}).observe(document,{childList:!0,subtree:!0});function i(o){const n={};return o.integrity&&(n.integrity=o.integrity),o.referrerPolicy&&(n.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?n.credentials="include":o.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function r(o){if(o.ep)return;o.ep=!0;const n=i(o);fetch(o.href,n)}})();const l=document.querySelector(".gallery");function y(e){const t=e.map(({likes:r,views:o,downloads:n,comments:s,tags:d,largeImageURL:g,webformatURL:f})=>`<li class="img-card">
-                        <a class="gallery-link" href= "${g}">
+import{S as m,i as u,a as h}from"./assets/vendor-Db2TdIkw.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const o of document.querySelectorAll('link[rel="modulepreload"]'))r(o);new MutationObserver(o=>{for(const n of o)if(n.type==="childList")for(const s of n.addedNodes)s.tagName==="LINK"&&s.rel==="modulepreload"&&r(s)}).observe(document,{childList:!0,subtree:!0});function i(o){const n={};return o.integrity&&(n.integrity=o.integrity),o.referrerPolicy&&(n.referrerPolicy=o.referrerPolicy),o.crossOrigin==="use-credentials"?n.credentials="include":o.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function r(o){if(o.ep)return;o.ep=!0;const n=i(o);fetch(o.href,n)}})();const l=document.querySelector(".gallery");function y(e){const t=e.map(({likes:r,views:o,downloads:n,comments:s,tags:g,largeImageURL:d,webformatURL:f})=>`<li class="img-card">
+                        <a class="gallery-link" href= "${d}">
                             <img
                             class="gallery-image"
                             src= "${f}"
-                            alt= "${d}"
+                            alt= "${g}"
                             />
                         </a>
                         <ul class="img-info">
                             <li class="info">
                                 <svg class="icon-info" name="like" width="18" height="18">
-                                    <use href="/img/sprite.svg#icon-like"></use>
+                                    <use href="/goit-js-hw-09/img/sprite.svg#icon-like"></use>
                                 </svg>
                                 <p>${r}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/img/sprite.svg#icon-eye"></use>
+                                    <use href="/goit-js-hw-09/img/sprite.svg#icon-eye"></use>
                                 </svg>
                                 <p>${o}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/img/sprite.svg#icon-dialog"></use>
+                                    <use href="/goit-js-hw-09/img/sprite.svg#icon-dialog"></use>
                                 </svg>
                                 <p>${s}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/img/sprite.svg#icon-gallery-download"></use>
+                                    <use href="/goit-js-hw-09/img/sprite.svg#icon-gallery-download"></use>
                                 </svg>
                                 <p>${n}</p>
                             </li>
