@@ -32,25 +32,25 @@ export function createGallery(images) {
                         <ul class="img-info">
                             <li class="info">
                                 <svg class="icon-info" name="like" width="18" height="18">
-                                    <use href="/public/sprite.svg#icon-like"></use>
+                                    <use href="/img/sprite.svg#icon-like"></use>
                                 </svg>
                                 <p>${likes}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/public/sprite.svg#icon-eye"></use>
+                                    <use href="/img/sprite.svg#icon-eye"></use>
                                 </svg>
                                 <p>${views}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/public/sprite.svg#icon-dialog"></use>
+                                    <use href="/img/sprite.svg#icon-dialog"></use>
                                 </svg>
                                 <p>${comments}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="/public/sprite.svg#icon-gallery-download"></use>
+                                    <use href="/img/sprite.svg#icon-gallery-download"></use>
                                 </svg>
                                 <p>${downloads}</p>
                             </li>
