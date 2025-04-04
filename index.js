@@ -9,25 +9,25 @@ import{S as m,i as u,a as h}from"./assets/vendor-Db2TdIkw.js";(function(){const 
                         <ul class="img-info">
                             <li class="info">
                                 <svg class="icon-info" name="like" width="18" height="18">
-                                    <use href="./public/sprite.svg#icon-like"></use>
+                                    <use href="/public/sprite.svg#icon-like"></use>
                                 </svg>
                                 <p>${r}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="./public/sprite.svg#icon-eye"></use>
+                                    <use href="/public/sprite.svg#icon-eye"></use>
                                 </svg>
                                 <p>${o}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="./public/sprite.svg#icon-dialog"></use>
+                                    <use href="/public/sprite.svg#icon-dialog"></use>
                                 </svg>
                                 <p>${s}</p>
                             </li>
                             <li class="info">
                                 <svg class="icon-info" width="18" height="18">
-                                    <use href="./public/sprite.svg#icon-gallery-download"></use>
+                                    <use href="/public/sprite.svg#icon-gallery-download"></use>
                                 </svg>
                                 <p>${n}</p>
                             </li>
