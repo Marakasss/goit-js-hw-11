@@ -1,6 +1,6 @@
 
 import { getImagesByQuery } from './js/pixabay-api';
-import { addLoading, changeIconColor, clearGallery, clickOnlike, createGallery,  infoMessage, removeLoading } from './js/render-functions';
+import { errorMessage, addLoading, changeIconColor, clearGallery, clickOnlike, createGallery,  infoMessage, waitForImagesToLoad } from './js/render-functions';
 
 
 const searchBar = document.querySelector('.form');
@@ -25,11 +25,21 @@ function handleSubmit() {
                 if (images.length === 0) {
                     infoMessage(`Sorry, there are no images matching ${query}. Please try again!`);
                     clearGallery();
-                    removeLoading();
+                    
                     return;
                 }
                 
                 createGallery(images)
+            })
+            
+            .catch(error => {
+                errorMessage('Something went wrong. Please try again later.');
+                clearGallery();
+                
+            })
+        
+            .finally(() => {
+                waitForImagesToLoad();
             })
             
     })

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { errorMessage } from './render-functions';
+
 
 export async function getImagesByQuery(query) {
     
@@ -14,13 +14,13 @@ export async function getImagesByQuery(query) {
             per_page: 100,
         }
     })
-        .then(response => { return response.data.hits })
+        .then(response => {
+            return response.data.hits
+        })
 
         .catch(error => {
-                console.error(error);
-                removeLoading();
-                errorMessage('Something went wrong. Please try again later.');
-                return [];
+            console.error(error);
+            throw error;
             })
                
 }

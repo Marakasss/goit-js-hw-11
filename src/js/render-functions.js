@@ -17,8 +17,8 @@ export function createGallery(images) {
                     downloads,
                     comments,
                     tags,
-                    largeImageURL,
-                    webformatURL   
+                    largeImageURL = '/goit-js-hw-11/img/image-not-found.jpg',
+                    webformatURL = '/goit-js-hw-11/img/image-not-found.jpg'  
                 }) =>
             
              `<li class="img-card">
@@ -26,7 +26,7 @@ export function createGallery(images) {
                             <img
                             class="gallery-image"
                             src= "${webformatURL}"
-                            alt= "${tags}"
+                            alt= "${tags.split(',')[0].trim()}"
                             />
                         </a>
                         <ul class="img-info">
@@ -137,7 +137,7 @@ export function removeLoading() {
 //Функцію додав щоб вирішити проблему з завантаженням сторінки.
 //Так як у мене likes, views, comemnts, downloads реалізовані іконками
 //то іконки завантажувались швидше за зображення і виглядало це не добре.
-function waitForImagesToLoad() {
+export function waitForImagesToLoad() {
     const gallery = document.querySelector('.gallery');
     if (!gallery) {
         removeLoading();
@@ -161,6 +161,12 @@ function waitForImagesToLoad() {
                 checkIfAllImagesLoaded();
             };
             img.onerror = () => {
+                if (!img.src.includes('image-not-found.jpg')) {
+                    img.src = '/goit-js-hw-11/img/image-not-found.jpg'; //ставимо заглушки якщо помилка
+                    img.alt = 'Image not found';
+                    img.onerror = null; 
+                }
+                
                 loadedCount++; //Якщо зображення не завантажилося, теж  враховуємо
                 checkIfAllImagesLoaded();
             };
