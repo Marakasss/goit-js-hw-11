@@ -23,17 +23,19 @@ function handleSubmit() {
             .then(images => {
                 
                 if (images.length === 0) {
-                    infoMessage(`Sorry, there are no images matching ${query}. Please try again!`);
-                    clearGallery();
-                    
-                    return;
+                    throw new Error(`Sorry, there are no images matching ${query}. Please try again!`);
                 }
                 
                 createGallery(images)
             })
             
             .catch(error => {
-                errorMessage('Something went wrong. Please try again later.');
+                if (error.message.includes('no images')) {
+                    infoMessage(error.message);
+                } else {
+                    errorMessage('Something went wrong. Please try again later.');
+                }
+                
                 clearGallery();
                 
             })
